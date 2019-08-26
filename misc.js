@@ -3,8 +3,8 @@
  * 
  * Creates an array with the same number of dimensions as the number of the parameters with the given amount of elements
  * 
- * @params {numbers} sizes of the dimensions
- * @param {ExistingClass} lastArgument optionally this can be an existing class and if it is then every element will be created with this class's 0 parameter constructor
+ * @param {...integer} size the sizes of the dimensions as separate arguments
+ * @param {Class} lastArgument optionally this can be an existing class and if it is then every element will be created with this class's 0 parameter constructor
  */
 function createArray() {
     let array;
@@ -32,7 +32,7 @@ function createArray() {
  * 
  * Delays an async code with the given amount of milliseconds
  * 
- * @param milliseconds Length of the delay in milliseconds
+ * @param {integer} milliseconds Length of the delay in milliseconds
  */
 function waitForMilliseconds(milliseconds){
     return new Promise(resolve =>{
@@ -49,11 +49,23 @@ function waitForMilliseconds(milliseconds){
  */
 class CallFunctionOnMultipleEvents {
     
+    /**
+     * 
+     * Creates a caller object
+     * 
+     * @param {*} numberOfEvents 
+     * @param {*} functionToCall 
+     */
     constructor(numberOfEvents, functionToCall){
         this.numberOfEvents = numberOfEvents;
         this.functionToCall = functionToCall;
     }
 
+    /**
+     * 
+     * Function to call on every completed event
+     * 
+     */
     eventComplete(){
         this.numberOfEvents--;
         if(this.numberOfEvents <= 0){
