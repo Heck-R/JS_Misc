@@ -155,3 +155,33 @@ function convertToNumber(thing){
 function wholeRand(possResNum = Number.MAX_SAFE_INTEGER, minVal = 0){
 	return Math.floor( (Math.random() * possResNum) + minVal );
 }
+
+/**
+ * 
+ * Makes a node visible by setting it's display to ""
+ * 
+ * @param {Node} node 
+ */
+function nodeOn(node){
+    node.style.display = "";
+}
+
+/**
+ * 
+ * Makes a node invisible by setting it's display to "none"
+ * 
+ * @param {Node} node 
+ */
+function nodeOff(node){
+    node.style.display = "none";
+}
+
+/**
+ * 
+ * Sets a node's visibility by setting it's display between "" and "none"
+ * 
+ * @param {Node} node 
+ */
+function nodeOnOff(node){
+    node.style.display == "" ? nodeOff(node) : nodeOn(node);
+}
