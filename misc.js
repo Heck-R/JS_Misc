@@ -163,7 +163,7 @@ function wholeRand(possResNum = Number.MAX_SAFE_INTEGER, minVal = 0){
  * @param {Node} node 
  */
 function nodeOn(node){
-    node.style.display = "";
+    node.style.display = "unset";
 }
 
 /**
@@ -183,5 +183,5 @@ function nodeOff(node){
  * @param {Node} node 
  */
 function nodeOnOff(node){
-    node.style.display == "" ? nodeOff(node) : nodeOn(node);
+    node.style.display == "none" ? nodeOn(node) : nodeOff(node);
 }
