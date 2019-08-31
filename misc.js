@@ -158,17 +158,17 @@ function wholeRand(possResNum = Number.MAX_SAFE_INTEGER, minVal = 0){
 
 /**
  * 
- * Makes a node visible by setting it's display to ""
+ * Makes a node visible by setting it's inline display to ""
  * 
  * @param {Node} node 
  */
 function nodeOn(node){
-    node.style.display = "unset";
+    node.style.display = "";
 }
 
 /**
  * 
- * Makes a node invisible by setting it's display to "none"
+ * Makes a node invisible by setting it's inline display to "none"
  * 
  * @param {Node} node 
  */
@@ -178,7 +178,7 @@ function nodeOff(node){
 
 /**
  * 
- * Sets a node's visibility by setting it's display between "" and "none"
+ * Sets a node's visibility by setting it's inline display between "" and "none"
  * 
  * @param {Node} node 
  */
