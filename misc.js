@@ -185,3 +185,19 @@ function nodeOff(node){
 function nodeOnOff(node){
     node.style.display == "none" ? nodeOn(node) : nodeOff(node);
 }
+
+/**
+ * 
+ * Wraps a given element into a newly created one
+ * 
+ * @param {Element} toWrap Node to wrap
+ * @param {String} wrapperElement A createable element's name (eg.: div, span...)
+ * @returns {Element} The wrapper element
+ */
+function wrap(toWrap, wrapperElement) {
+    let wrapper = document.createElement(wrapperElement);
+    if(toWrap.parentNode)
+        toWrap.parentNode.insertBefore(wrapper, toWrap);
+    wrapper.appendChild(toWrap);
+    return wrapper;
+}
