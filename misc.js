@@ -201,3 +201,13 @@ function wrap(toWrap, wrapperElement) {
     wrapper.appendChild(toWrap);
     return wrapper;
 }
+
+/**
+ * 
+ * A simple function to shorten callback when preventing default is the only intent
+ * 
+ * @param {Event} event 
+ */
+function preventEvent(event){
+    event.preventDefault();
+}
