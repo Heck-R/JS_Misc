@@ -121,7 +121,10 @@ function createTable(rowNum, colNum, options = {}){
 function createSwitchableRadioInput(toAssign = undefined){
     let radioButton = document.createElement('input');
 
-    radioButton.addEventListener('mousedown', switchRadio);
+    radioButton.addEventListener('mousedown', (event) => {
+        event.preventDefault();
+        event.target.checked = !event.target.checked;
+    });
     radioButton.addEventListener('click', preventEvent);
     if(toAssign != undefined)
         Object.assign(radioButton, toAssign);
