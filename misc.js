@@ -81,7 +81,7 @@ class CallFunctionOnMultipleEvents {
  * 
  * @param {integer} xCellNum 
  * @param {integer} yCellNum 
- * @param {Object} options optional, if contains addCellID = true, the cells will have and id whicj is their coordinates like [y,x]
+ * @param {Object} options if contains addCellID = true, the cells will have and id whicj is their coordinates like [y,x]
  */
 function createTable(rowNum, colNum, options = {}){
 
@@ -110,6 +110,23 @@ function createTable(rowNum, colNum, options = {}){
 
     return table;
 
+}
+
+/**
+ * 
+ * Creates a radio input which can be switched off on click
+ * 
+ * @param {Object} toAssign An object of properties to assign to the element (note that this assign is shallow)
+ */
+function createSwitchableRadioInput(toAssign = undefined){
+    let radioButton = document.createElement('input');
+
+    radioButton.addEventListener('mousedown', switchRadio);
+    radioButton.addEventListener('click', preventEvent);
+    if(toAssign != undefined)
+        Object.assign(radioButton, toAssign);
+    
+    return radioButton;
 }
 
 /**
