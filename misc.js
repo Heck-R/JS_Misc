@@ -231,3 +231,13 @@ function wrap(toWrap, wrapperElement) {
 function preventEvent(event){
     event.preventDefault();
 }
+
+/**
+ * 
+ * A simple function to shorten callback when selecting the input's content is the only intent
+ * 
+ * @param {Event} event 
+ */
+function selectInputText(event){
+    event.target.setSelectionRange(0, event.target.value.length);
+}
