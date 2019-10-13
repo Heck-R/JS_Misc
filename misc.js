@@ -3,29 +3,52 @@
  * 
  * Creates an array with the same number of dimensions as the number of the parameters with the given amount of elements
  * 
- * @param {...integer} size the sizes of the dimensions as separate arguments
- * @param {Class} classReference optionally this can be an existing class and if it is then every element will be an instance of that class (except for Number, where the elements will be primitive numbers and not objects). If ommitted the values will be undefined 
- * @param {Array|float} instantiationParameters if a classReference was provided, optionally this can be an array of parameters for the class' initalization. If the elements are numbers, this can be a single number instead of an array. [] by default
+ * @param {...integer} size the sizes of the dimensions as separate arguments (at least one)
+ * @param {Function} init optionally this can be a function which should return the desired values of the element upon call. It might get the current element's position in the array as argument (depends on next parameter).
+ * @param {boolean} passPosition if true, the init function gets the current element's position in the array as parameter
  */
 function createArray() {
     let array;
 
+    let newArgs = Array.prototype.slice.call(arguments, 1);
+    if( ! Array.isArray(newArgs[newArgs.length-1]) ){
+        if(newArgs[newArgs.length-1] === true)
+            newArgs[newArgs.length-1] = [];
+        else if(newArgs[newArgs.length-1] !== false)
+            newArgs.push(false);
+    }
+
     if(Number.isInteger(arguments[0])) {
         array = new Array(arguments[0]);
         let i = arguments[0];
-        let newArgs = Array.prototype.slice.call(arguments, 1);
-        while(i--)
-            array[arguments[0]-1 - i] = createArray.apply(null, newArgs);
-    } else{
-        if(arguments[0] != undefined){
-            if(arguments[0].name === 'Number')
-                array = arguments[1] != undefined ? Number.parseFloat(arguments[1]) : 0;
-            else
-                array = Array.isArray(arguments[1]) ? new arguments[0](...arguments[1]) : array = new arguments[0]();
+        if(newArgs[newArgs.length-1] !== false){
+            newArgs[newArgs.length-1] = newArgs[newArgs.length-1].slice();
+            newArgs[newArgs.length-1].push(0);
         }
+        while(i--){
+            let pos = arguments[0]-1 - i;
+            if(newArgs[newArgs.length-1] !== false){
+                newArgs[newArgs.length-1] = newArgs[newArgs.length-1].slice();
+                newArgs[newArgs.length-1][ newArgs[newArgs.length-1].length-1 ] = pos;
+            }
+            array[pos] = createArray(...newArgs);
+        }
+    } else if(arguments.length == 2){
+        array = arguments[1] === false ? arguments[0]() : arguments[0](arguments[1]);
     }
     
     return array;
+}
+
+/**
+ * 
+ * Simple function that returns the parameter
+ * Same as x => x
+ * 
+ * @param {*} x 
+ */
+function identityFn(x){
+    return x;
 }
 
 /**
