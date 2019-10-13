@@ -4,24 +4,24 @@
  * Creates an array with the same number of dimensions as the number of the parameters with the given amount of elements
  * 
  * @param {...integer} size the sizes of the dimensions as separate arguments
- * @param {Class} lastArgument optionally this can be an existing class and if it is then every element will be created with this class's 0 parameter constructor
+ * @param {Class} classReference optionally this can be an existing class and if it is then every element will be an instance of that class (except for Number, where the elements will be primitive numbers and not objects). If ommitted the values will be undefined 
+ * @param {Array|float} instantiationParameters if a classReference was provided, optionally this can be an array of parameters for the class' initalization. If the elements are numbers, this can be a single number instead of an array. [] by default
  */
 function createArray() {
     let array;
-    let typeGiven = arguments[arguments.length-1] != undefined && ! Number.isInteger( arguments[arguments.length-1] );
 
-    if(arguments.length > typeGiven ? 1 : 0) {
+    if(Number.isInteger(arguments[0])) {
         array = new Array(arguments[0]);
         let i = arguments[0];
         let newArgs = Array.prototype.slice.call(arguments, 1);
         while(i--)
             array[arguments[0]-1 - i] = createArray.apply(null, newArgs);
     } else{
-        if(typeGiven){
+        if(arguments[0] != undefined){
             if(arguments[0].name === 'Number')
-                array = 0;
+                array = arguments[1] != undefined ? Number.parseFloat(arguments[1]) : 0;
             else
-                array = new arguments[0]();
+                array = Array.isArray(arguments[1]) ? new arguments[0](...arguments[1]) : array = new arguments[0]();
         }
     }
     
