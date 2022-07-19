@@ -75,7 +75,7 @@ function waitForMilliseconds(milliseconds){
  * @returns {Promise} 
  */
 function waitForCondition(stateFunc, check=true, delay=1000) {
-	let checkFunc = typeof check == "function" ? check : value => check == value
+    let checkFunc = typeof check == "function" ? check : value => check == value
     return new Promise(resolve => {
         function checkState() {
             if (checkFunc(stateFunc())) {
@@ -219,7 +219,7 @@ function convertToNumber(thing){
  * @param {*} minVal 0 by default. The lowest possible value. In case of wholeNum(3, 2), the possible outcomes are 2,3,4. 
  */
 function wholeRand(possResNum = Number.MAX_SAFE_INTEGER, minVal = 0){
-	return Math.floor( (Math.random() * possResNum) + minVal );
+    return Math.floor( (Math.random() * possResNum) + minVal );
 }
 
 /**
