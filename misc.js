@@ -1,5 +1,35 @@
 
 /**
+ * Get the first Node based on an xPath
+ * (A shorthand version of document.evaluate(...) returning only the first match)
+ * 
+ * @param {XPathExpression} xPath 
+ * @param {Node} contextNode 
+ * @returns {Node}
+ */
+function getElementByXpath(xPath) {
+    return getElementsByXpath(xPath)[0]
+}
+
+/**
+ * Get all Nodes based on an xPath
+ * (A shorthand version of document.evaluate(...) with an array as a result)
+ * 
+ * @param {XPathExpression} xPath 
+ * @param {Node} contextNode 
+ * @returns {Array<Node>}
+ */
+function getElementsByXpath(xPath, contextNode=document) {
+    let xpathResult = document.evaluate(xPath, contextNode, null, XPathResult.ANY_TYPE, null)
+    let resultList = []
+    let result
+    while (result = xpathResult.iterateNext()) {
+        resultList.push(result)
+    }
+    return resultList
+}
+
+/**
  * 
  * Creates an array with the same number of dimensions as the number of the parameters with the given amount of elements
  * 
