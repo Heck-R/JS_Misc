@@ -100,16 +100,15 @@ function waitForMilliseconds(milliseconds){
  * The returned Promise is resolved when the checking the state returns true
  * 
  * @param {Function} stateFunc The function yielding the value to check, using the check parameter
- * @param {Function | *} check Checks the result of the stateFunc parameter. Either a function with one argument for the stateFunc result to be passed or anything else, in which case equality is tested 
- * @param {integer} delay Delay between the checks
- * @returns {Promise} 
+ * @param {integer} delay Delay in milliseconds between the checks
+ * @returns {Promise} Promise containing the last state value which resolved. The value is only useful if a non true, but truthy value is the state
  */
-function waitForCondition(stateFunc, check=true, delay=1000) {
-    let checkFunc = typeof check == "function" ? check : value => check == value
+function waitForState(stateFunc, delay=1000) {
     return new Promise(resolve => {
         function checkState() {
-            if (checkFunc(stateFunc())) {
-                resolve()
+            let state = stateFunc()
+            if (state) {
+                resolve(state)
             } else {
                 window.setTimeout(checkState, delay);
             }
